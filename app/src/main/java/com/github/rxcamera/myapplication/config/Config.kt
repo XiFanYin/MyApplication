@@ -17,7 +17,7 @@ class Config(builder: Builder) {
          * 使用前置摄像头
          */
         fun useFrontCamera(): Builder {
-            currentCameraId = CameraUtil.getBackCameraId()
+            currentCameraId = CameraUtil.getFrontCameraId()
             return this
         }
 

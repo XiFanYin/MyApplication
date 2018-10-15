@@ -11,7 +11,7 @@ import com.github.rxcamera.myapplication.perview.PreviewImpl
 import com.github.rxcamera.myapplication.perview.SurfaceViewPreview
 import com.github.rxcamera.myapplication.perview.TextureViewPreview
 
-class CameraManager(val context: Activity,rongqi: FrameLayout =context.findViewById(android.R.id.content) , var config: Config = Config.Builder.useBackCamera().build()) {
+class CameraManager(val context: Activity,rongqi: FrameLayout =context.findViewById(android.R.id.content) , var config: Config = Config.Builder.useFrontCamera().build()) {
     //相机实现接口
     private var cameraImpl: CameraImpl
     //预览实现接口
@@ -22,6 +22,7 @@ class CameraManager(val context: Activity,rongqi: FrameLayout =context.findViewB
 
 //        cameraImpl = if (Build.VERSION.SDK_INT < 21) Camera1() else Camera2()
 //        previewImpl = if (Build.VERSION.SDK_INT < 14) SurfaceViewPreview(context,rongqi) else TextureViewPreview(rongqi)
+
         cameraImpl = Camera1()
         previewImpl = SurfaceViewPreview(context,rongqi)
     }

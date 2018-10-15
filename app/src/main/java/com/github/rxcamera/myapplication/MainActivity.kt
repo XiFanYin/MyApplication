@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
                     .request(Manifest.permission.CAMERA)
                     .subscribe { aBoolean ->
                         if (aBoolean) {
-                            CameraManager(this,rongqi).openCamera()
+                            CameraManager(this).openCamera()
                         }
                     }
 
