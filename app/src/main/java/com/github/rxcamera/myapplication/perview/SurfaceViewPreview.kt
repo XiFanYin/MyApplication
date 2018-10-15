@@ -16,13 +16,48 @@
 
 package com.github.rxcamera.myapplication.perview
 
+import android.app.Activity
+import android.util.Log
+import android.view.SurfaceHolder
+import android.view.SurfaceView
+import android.view.View
 import android.widget.FrameLayout
+import com.github.rxcamera.myapplication.R
 
-class SurfaceViewPreview(rootView: FrameLayout) : PreviewImpl {
+class SurfaceViewPreview(context: Activity, rongqi: FrameLayout) : PreviewImpl {
+
+    lateinit var call: PreviewImpl.Call
+    override fun setcallback(call: PreviewImpl.Call) {
+        this.call = call
+    }
+
+    val mSurfaceView: SurfaceView
 
     init {
+        val view = View.inflate(context, R.layout.surface_view, rongqi)
+        mSurfaceView = view.findViewById(R.id.surface_view) as SurfaceView
+        val holder = mSurfaceView.getHolder()
+        holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS)
+        holder.addCallback(object : SurfaceHolder.Callback {
+            override fun surfaceCreated(h: SurfaceHolder) {
+                call.onCall()
+            }
+
+            override fun surfaceChanged(h: SurfaceHolder, format: Int, width: Int, height: Int) {
 
 
+            }
+
+            override fun surfaceDestroyed(h: SurfaceHolder) {
+
+            }
+        })
+
+    }
+
+
+    override fun getSurfaceHolder(): SurfaceHolder {
+        return mSurfaceView.holder
     }
 
 }

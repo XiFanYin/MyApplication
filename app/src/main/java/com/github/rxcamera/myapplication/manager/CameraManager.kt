@@ -19,11 +19,11 @@ class CameraManager(val context: Activity,rongqi: FrameLayout =context.findViewB
 
 
     init {
-        //初始化相机接口
-        cameraImpl = if (Build.VERSION.SDK_INT < 21) Camera1() else Camera2()
-        //初始化预览接口
-        previewImpl = if (Build.VERSION.SDK_INT < 14) SurfaceViewPreview(rongqi) else TextureViewPreview(rongqi)
 
+//        cameraImpl = if (Build.VERSION.SDK_INT < 21) Camera1() else Camera2()
+//        previewImpl = if (Build.VERSION.SDK_INT < 14) SurfaceViewPreview(context,rongqi) else TextureViewPreview(rongqi)
+        cameraImpl = Camera1()
+        previewImpl = SurfaceViewPreview(context,rongqi)
     }
 
 
@@ -32,6 +32,7 @@ class CameraManager(val context: Activity,rongqi: FrameLayout =context.findViewB
      */
     fun openCamera() {
         cameraImpl.openCamera(context, config, previewImpl)
+
     }
 
 

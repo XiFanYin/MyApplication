@@ -1,15 +1,9 @@
 package com.github.rxcamera.myapplication.camera
 
-import CameraUtils.CameraUtil
 import android.app.Activity
 import android.hardware.Camera
-import android.widget.FrameLayout
 import com.github.rxcamera.myapplication.config.Config
-import com.github.rxcamera.myapplication.error.NoCameraError
-import com.github.rxcamera.myapplication.error.OpenCameraError
-import com.github.rxcamera.myapplication.event.OpenCameraEvent
 import com.github.rxcamera.myapplication.perview.PreviewImpl
-import io.reactivex.Observable
 
 
 class Camera1 : CameraImpl {
@@ -18,18 +12,15 @@ class Camera1 : CameraImpl {
 
     override fun openCamera(context: Activity, config: Config, previewImpl: PreviewImpl) {
 
-        Observable.create<OpenCameraEvent> {
-            if (!CameraUtil.checkCameraHardware(context)) {
-                it.onError(NoCameraError("设备没有相机"))
-            } else {
-                if (getCameraInstance(config.currentCameraId) == null) {
-                    it.onError(OpenCameraError("打开相机失败"))
-                } else {
-
-                }
+        mCamera = getCameraInstance(config.currentCameraId)
+        previewImpl.setcallback(object:PreviewImpl.Call{
+            override fun onCall() {
+                mCamera!!.setPreviewDisplay(previewImpl.getSurfaceHolder())
+                //将预览显示的顺时针旋转设置为度数
+                mCamera!!.setDisplayOrientation(90)
+                mCamera!!.startPreview()
             }
-        }
-
+        })
     }
 
 
@@ -42,7 +33,7 @@ class Camera1 : CameraImpl {
             Camera.open(cameraId)
         } catch (e: Exception) {
             // 相机是不可用的（在使用中或不存在）
-            null
+            return null
         }
     }
 
