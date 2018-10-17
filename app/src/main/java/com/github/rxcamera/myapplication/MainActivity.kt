@@ -1,9 +1,9 @@
 package com.github.rxcamera.myapplication
 
 import android.Manifest
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.github.rxcamera.myapplication.manager.CameraManager
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,11 +18,13 @@ class MainActivity : AppCompatActivity() {
                     .request(Manifest.permission.CAMERA)
                     .subscribe { aBoolean ->
                         if (aBoolean) {
-                            CameraManager(this).openCamera()
+                            startActivity(Intent(this, CostomCameraActivity::class.java))
                         }
                     }
 
 
         })
     }
+
+
 }
