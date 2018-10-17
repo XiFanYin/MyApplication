@@ -4,13 +4,10 @@ import android.view.SurfaceHolder
 import android.widget.FrameLayout
 
 class TextureViewPreview(activity: FrameLayout) : PreviewImpl {
-    override fun setcallback(call: PreviewImpl.Call) {
+    override fun getHolder(): SurfaceHolder {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getSurfaceHolder(): SurfaceHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
 
 }

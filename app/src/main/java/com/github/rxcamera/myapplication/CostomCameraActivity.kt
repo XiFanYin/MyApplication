@@ -12,6 +12,9 @@ class CostomCameraActivity : AppCompatActivity() {
 
         rxCameraView.openCamera()
 
+        btn_qiehuan.setOnClickListener {
+            rxCameraView.switchCamera()
+        }
 
     }
 

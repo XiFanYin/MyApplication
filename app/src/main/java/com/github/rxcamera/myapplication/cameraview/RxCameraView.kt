@@ -8,7 +8,6 @@ import com.github.rxcamera.myapplication.camera.CameraImpl
 import com.github.rxcamera.myapplication.cameraview.CameraViewImpl
 import com.github.rxcamera.myapplication.perview.PreviewImpl
 import com.github.rxcamera.myapplication.perview.SurfaceViewPreview
-import io.reactivex.Observable
 
 /*相机自定义控件，对外提供rx方式的统一操作符*/
 class RxCameraView : FrameLayout, CameraViewImpl {
@@ -16,6 +15,7 @@ class RxCameraView : FrameLayout, CameraViewImpl {
 
     var cameraImpl: CameraImpl
     var preview: PreviewImpl
+    var cameraId = 0
 
     /*构造方法*/
     constructor(context: Context) : this(context, null)
@@ -30,19 +30,14 @@ class RxCameraView : FrameLayout, CameraViewImpl {
         /*相机核心类*/
         cameraImpl = Camera1(preview)
 
+
     }
 
     /**
      * 打开相机
      */
-    override fun openCamera(): Observable<RxCameraView> {
-        return Observable.create {
-            if (cameraImpl.openCamera()) {
-                it.onNext(this)
-            } else {
-                it.onError(RuntimeException("打开相机失败"))
-            }
-        }
+    override fun openCamera() {
+        cameraImpl.openCamera(cameraId)
     }
 
 
@@ -55,7 +50,12 @@ class RxCameraView : FrameLayout, CameraViewImpl {
     }
 
     override fun switchCamera() {
-
+        if (cameraId == 0) {
+            cameraId = 1
+        } else {
+            cameraId = 0
+        }
+        cameraImpl.switchCamera(cameraId)
     }
 
 
