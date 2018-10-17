@@ -8,6 +8,7 @@ import com.github.rxcamera.myapplication.camera.CameraImpl
 import com.github.rxcamera.myapplication.cameraview.CameraViewImpl
 import com.github.rxcamera.myapplication.perview.PreviewImpl
 import com.github.rxcamera.myapplication.perview.SurfaceViewPreview
+import io.reactivex.Observable
 
 /*相机自定义控件，对外提供rx方式的统一操作符*/
 class RxCameraView : FrameLayout, CameraViewImpl {
@@ -33,22 +34,13 @@ class RxCameraView : FrameLayout, CameraViewImpl {
 
     }
 
-    /**
-     * 打开相机
-     */
-    override fun openCamera() {
-        cameraImpl.openCamera(cameraId)
+    /* 打开相机 */
+    override fun openCamera(): Observable<ByteArray> {
+        return cameraImpl.openCamera(cameraId)
     }
 
 
-    override fun closeCamera() {
-
-    }
-
-    override fun switchFlash() {
-
-    }
-
+    /*切换摄像头*/
     override fun switchCamera() {
         if (cameraId == 0) {
             cameraId = 1
@@ -59,4 +51,11 @@ class RxCameraView : FrameLayout, CameraViewImpl {
     }
 
 
+    override fun closeCamera() {
+
+    }
+
+    override fun switchFlash() {
+
+    }
 }

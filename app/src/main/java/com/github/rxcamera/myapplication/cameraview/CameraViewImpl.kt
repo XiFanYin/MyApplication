@@ -7,7 +7,7 @@ import io.reactivex.Observable
 interface CameraViewImpl {
 
     /*打开相机*/
-    fun openCamera()
+    fun openCamera(): Observable<ByteArray>
 
     /*关闭相机*/
     fun closeCamera()
