@@ -20,7 +20,7 @@ class RxCameraView : FrameLayout, CameraViewImpl {
     /*预览接口*/
     private var preview: PreviewImpl
 
-    private lateinit var defultConfig: Config
+    private lateinit var config: Config
 
     /*构造方法*/
     constructor(context: Context) : this(context, null)
@@ -39,19 +39,19 @@ class RxCameraView : FrameLayout, CameraViewImpl {
 
     /* 打开相机 */
     override fun openCamera(config: Config): Observable<ByteArray> {
-        this.defultConfig = config
-        return cameraImpl.openCamera(defultConfig)
+        this.config = config
+        return cameraImpl.openCamera(config)
     }
 
 
     /*切换摄像头*/
     override fun switchCamera() {
-        if (defultConfig.currentCameraId == CameraUtil.getFrontCameraId()) {
-            defultConfig.currentCameraId = CameraUtil.getBackCameraId()
+        if (config.currentCameraId == CameraUtil.getFrontCameraId()) {
+            config.currentCameraId = CameraUtil.getBackCameraId()
         } else {
-            defultConfig.currentCameraId = CameraUtil.getFrontCameraId()
+            config.currentCameraId = CameraUtil.getFrontCameraId()
         }
-        cameraImpl.switchCamera(defultConfig)
+        cameraImpl.switchCamera(config)
     }
 
 

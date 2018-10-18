@@ -1,6 +1,5 @@
 package com.github.rxcamera.myapplication.camera
 
-import android.graphics.Bitmap
 import com.github.rxcamera.myapplication.config.Config
 import io.reactivex.Observable
 
