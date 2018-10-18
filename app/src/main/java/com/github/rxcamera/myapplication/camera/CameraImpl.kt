@@ -1,5 +1,7 @@
 package com.github.rxcamera.myapplication.camera
 
+import android.graphics.Bitmap
+import com.github.rxcamera.myapplication.config.Config
 import io.reactivex.Observable
 
 interface CameraImpl {
@@ -7,9 +9,9 @@ interface CameraImpl {
     /**
      * 打开相机
      */
-    fun openCamera(a :Int): Observable<ByteArray>
+    fun openCamera(config: Config): Observable<ByteArray>
 
-    fun switchCamera(cameraId: Int)
+    fun switchCamera(config: Config)
 
 
 }
