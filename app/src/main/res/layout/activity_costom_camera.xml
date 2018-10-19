@@ -10,8 +10,6 @@
         android:layout_height="match_parent" />
 
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,8 +26,7 @@
             android:id="@+id/btn_shanguang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="选择闪光灯"
-            android:visibility="gone" />
+            android:text="选择闪光灯" />
 
 
         <Button

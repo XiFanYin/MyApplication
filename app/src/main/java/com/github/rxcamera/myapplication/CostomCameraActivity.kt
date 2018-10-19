@@ -20,7 +20,11 @@ class CostomCameraActivity : AppCompatActivity() {
             rxCameraView.switchCamera()
 
         }
+        /*选择闪光灯*/
+        btn_shanguang.setOnClickListener {
+            rxCameraView.switchFlash()
 
+        }
     }
 
 
@@ -33,7 +37,7 @@ class CostomCameraActivity : AppCompatActivity() {
                 .subscribe({
                     when (it.type) {
                         EventType.PERVIEW -> {
-                            Log.e("rrrrrrrr",it.cameraData.size.toString())
+                            Log.e("rrrrrrrr", it.cameraData.size.toString())
                         }
 
 

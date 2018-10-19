@@ -20,7 +20,7 @@ class RxCameraView : FrameLayout, CameraViewImpl {
     private var cameraImpl: CameraImpl
     /*预览接口*/
     private var preview: PreviewImpl
-
+    /*打开相机配置*/
     private lateinit var config: Config
 
     /*构造方法*/

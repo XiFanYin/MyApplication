@@ -11,7 +11,15 @@ interface CameraImpl {
      */
     fun openCamera(config: Config): Observable<BaseEvent>
 
+    /*释放相机*/
+    fun releaseCamera()
+
+
+    /*选择摄像头*/
     fun switchCamera(config: Config)
+
+    /*选择散光灯*/
+    fun switchFlash()
 
 
 }

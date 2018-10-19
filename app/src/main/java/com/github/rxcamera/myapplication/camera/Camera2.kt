@@ -5,6 +5,14 @@ import com.github.rxcamera.myapplication.event.BaseEvent
 import io.reactivex.Observable
 
 class Camera2 : CameraImpl {
+    override fun releaseCamera() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun switchFlash() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun openCamera(config: Config): Observable<BaseEvent> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
