@@ -9,6 +9,7 @@ import com.github.rxcamera.myapplication.camera.Camera1
 import com.github.rxcamera.myapplication.camera.CameraImpl
 import com.github.rxcamera.myapplication.cameraview.CameraViewImpl
 import com.github.rxcamera.myapplication.config.Config
+import com.github.rxcamera.myapplication.event.BaseEvent
 import com.github.rxcamera.myapplication.perview.PreviewImpl
 import com.github.rxcamera.myapplication.perview.SurfaceViewPreview
 import io.reactivex.Observable
@@ -38,7 +39,7 @@ class RxCameraView : FrameLayout, CameraViewImpl {
     }
 
     /* 打开相机 */
-    override fun openCamera(config: Config): Observable<ByteArray> {
+    override fun openCamera(config: Config): Observable<BaseEvent> {
         this.config = config
         return cameraImpl.openCamera(config)
     }

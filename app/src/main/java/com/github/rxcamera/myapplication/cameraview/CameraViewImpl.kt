@@ -2,13 +2,14 @@ package com.github.rxcamera.myapplication.cameraview
 
 import com.github.rxcamera.RxCameraView
 import com.github.rxcamera.myapplication.config.Config
+import com.github.rxcamera.myapplication.event.BaseEvent
 import io.reactivex.Observable
 
 
 interface CameraViewImpl {
 
     /*打开相机*/
-    fun openCamera(config: Config=Config.Builder.useBackCamera().build()): Observable<ByteArray>
+    fun openCamera(config: Config=Config.Builder.useBackCamera().build()): Observable<BaseEvent>
 
     /*关闭相机*/
     fun closeCamera()

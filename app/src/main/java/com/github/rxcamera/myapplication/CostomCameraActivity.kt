@@ -3,8 +3,11 @@ package com.github.rxcamera.myapplication
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.github.rxcamera.myapplication.config.Config
+import com.github.rxcamera.myapplication.event.EventType
 import kotlinx.android.synthetic.main.activity_costom_camera.*
 import kotlinx.android.synthetic.main.activity_costom_camera.view.*
+import java.lang.reflect.Type
 
 class CostomCameraActivity : AppCompatActivity() {
 
@@ -24,10 +27,17 @@ class CostomCameraActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+        val config = Config.Builder.useFrontCamera().build()
         rxCameraView
-                .openCamera()
+                .openCamera(config)
                 .subscribe({
-                    Log.e("rrrrrrrrrr", it.size.toString())
+                    when (it.type) {
+                        EventType.PERVIEW -> {
+                            Log.e("rrrrrrrr",it.cameraData.size.toString())
+                        }
+
+
+                    }
                 })
 
     }

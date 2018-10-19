@@ -3,6 +3,8 @@ package com.github.rxcamera.myapplication.camera
 import android.hardware.Camera
 import android.view.SurfaceHolder
 import com.github.rxcamera.myapplication.config.Config
+import com.github.rxcamera.myapplication.event.BaseEvent
+import com.github.rxcamera.myapplication.event.EventType
 import com.github.rxcamera.myapplication.perview.PreviewImpl
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -17,12 +19,12 @@ class Camera1(val preview: PreviewImpl) : CameraImpl, SurfaceHolder.Callback {
     /*相机预览数据原始流*/
     lateinit var publishSubject: PublishSubject<ByteArray>
     /*相机整体对外的流*/
-    var totlePublishSubject: PublishSubject<ByteArray> = PublishSubject.create<ByteArray>()
+    var totlePublishSubject: PublishSubject<BaseEvent> = PublishSubject.create<BaseEvent>()
     /*管理流切换*/
     var mCompositeDisposable: CompositeDisposable? = null
 
     /*打开相机*/
-    override fun openCamera(config: Config): Observable<ByteArray> {
+    override fun openCamera(config: Config): Observable<BaseEvent> {
         /*初始化流*/
         publishSubject = PublishSubject.create<ByteArray>()
         try {
@@ -35,7 +37,7 @@ class Camera1(val preview: PreviewImpl) : CameraImpl, SurfaceHolder.Callback {
             /*设置预览回调*/
             mCamera.setPreviewCallback { bytes, camera -> publishSubject.onNext(bytes) }
             /*订阅预览流，发送到对应外部的流中*/
-            publishSubject.subscribe({ totlePublishSubject.onNext(it) }, {}, {}, { addDisposable(it) })
+            publishSubject.subscribe({ totlePublishSubject.onNext(BaseEvent(it,EventType.PERVIEW)) }, {}, {}, { addDisposable(it) })
             /*切换摄像头打开预览的代码*/
             mCamera.setPreviewDisplay(preview.getHolder())
             mCamera.startPreview()
