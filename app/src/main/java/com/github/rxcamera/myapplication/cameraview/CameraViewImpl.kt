@@ -17,8 +17,7 @@ interface CameraViewImpl {
     /*选择相机*/
     fun switchCamera()
 
-    /*是否开启闪光灯*/
-    fun switchFlash()
+    fun takePicture()
 
 
 }

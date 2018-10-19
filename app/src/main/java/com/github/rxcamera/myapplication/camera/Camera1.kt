@@ -73,9 +73,13 @@ class Camera1(val preview: PreviewImpl) : CameraImpl, SurfaceHolder.Callback {
 
     }
 
-    override fun switchFlash() {
+
+    /*拍照*/
+    override fun takePicture() {
+
 
     }
+
 
     override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
         mCamera!!.setPreviewDisplay(preview.getHolder())

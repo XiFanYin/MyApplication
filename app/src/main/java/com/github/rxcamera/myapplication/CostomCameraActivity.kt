@@ -16,14 +16,14 @@ class CostomCameraActivity : AppCompatActivity() {
         setContentView(R.layout.activity_costom_camera)
         /*切换摄像头*/
         btn_qiehuan.setOnClickListener {
-
             rxCameraView.switchCamera()
 
         }
-        /*选择闪光灯*/
-        btn_shanguang.setOnClickListener {
-            rxCameraView.switchFlash()
 
+
+        /*拍照*/
+        btn_pai.setOnClickListener {
+            rxCameraView.takePicture()
         }
     }
 
@@ -31,7 +31,10 @@ class CostomCameraActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        val config = Config.Builder.useFrontCamera().build()
+        val config = Config.Builder
+                .useFrontCamera()
+                .build()
+
         rxCameraView
                 .openCamera(config)
                 .subscribe({
@@ -40,8 +43,8 @@ class CostomCameraActivity : AppCompatActivity() {
                             Log.e("rrrrrrrr", it.cameraData.size.toString())
                         }
 
-
                     }
+
                 })
 
     }

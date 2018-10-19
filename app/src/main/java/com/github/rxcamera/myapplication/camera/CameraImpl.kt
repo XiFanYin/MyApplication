@@ -18,8 +18,7 @@ interface CameraImpl {
     /*选择摄像头*/
     fun switchCamera(config: Config)
 
-    /*选择散光灯*/
-    fun switchFlash()
+    fun takePicture()
 
 
 }

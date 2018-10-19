@@ -16,6 +16,8 @@ import io.reactivex.Observable
 
 /*相机自定义控件，对外提供rx方式的统一操作符*/
 class RxCameraView : FrameLayout, CameraViewImpl {
+
+
     /*相机接口*/
     private var cameraImpl: CameraImpl
     /*预览接口*/
@@ -60,9 +62,9 @@ class RxCameraView : FrameLayout, CameraViewImpl {
     override fun releaseCamera() {
         cameraImpl.releaseCamera()
     }
-
-    /*切换散光灯*/
-    override fun switchFlash() {
-
+    /*拍照*/
+    override fun takePicture() {
+        cameraImpl.takePicture()
     }
+
 }

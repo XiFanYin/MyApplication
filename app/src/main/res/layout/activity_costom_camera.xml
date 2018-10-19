@@ -19,14 +19,14 @@
             android:id="@+id/btn_pai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="拍照按钮"
-            android:visibility="gone" />
+            android:text="拍照按钮" />
 
         <Button
             android:id="@+id/btn_shanguang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="选择闪光灯" />
+            android:text="选择闪光灯"
+            android:visibility="gone" />
 
 
         <Button
