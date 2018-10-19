@@ -12,7 +12,7 @@ interface CameraViewImpl {
     fun openCamera(config: Config=Config.Builder.useBackCamera().build()): Observable<BaseEvent>
 
     /*关闭相机*/
-    fun closeCamera()
+    fun releaseCamera()
 
     /*选择相机*/
     fun switchCamera()

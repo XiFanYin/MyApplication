@@ -56,9 +56,9 @@ class RxCameraView : FrameLayout, CameraViewImpl {
     }
 
 
-    /*关闭相机*/
-    override fun closeCamera() {
-
+    /*释放相机*/
+    override fun releaseCamera() {
+        cameraImpl.releaseCamera()
     }
 
     /*切换散光灯*/

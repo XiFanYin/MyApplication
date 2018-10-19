@@ -46,5 +46,10 @@ class CostomCameraActivity : AppCompatActivity() {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        rxCameraView.releaseCamera()
+    }
+
 
 }

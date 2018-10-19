@@ -27,7 +27,6 @@ class Camera1(val preview: PreviewImpl) : CameraImpl, SurfaceHolder.Callback {
 
     /*打开相机*/
     override fun openCamera(config: Config): Observable<BaseEvent> {
-
         /*初始化流*/
         publishSubject = PublishSubject.create<ByteArray>()
         try {
