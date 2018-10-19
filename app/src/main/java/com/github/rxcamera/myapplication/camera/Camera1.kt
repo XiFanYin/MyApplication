@@ -15,31 +15,38 @@ import java.lang.Exception
 /*使用Camera1的API*/
 class Camera1(val preview: PreviewImpl) : CameraImpl, SurfaceHolder.Callback {
 
-
     /*相机对象*/
     var mCamera: Camera? = null
-    /*相机预览数据原始流*/
-    lateinit var publishSubject: PublishSubject<ByteArray>
+    /*相机服务类对象*/
+    var parameters: Camera.Parameters? = null
+
+
     /*相机整体对外的流*/
     var totlePublishSubject: PublishSubject<BaseEvent> = PublishSubject.create<BaseEvent>()
-    /*管理流切换*/
-    var mCompositeDisposable: CompositeDisposable? = null
 
     /*打开相机*/
     override fun openCamera(config: Config): Observable<BaseEvent> {
-        /*初始化流*/
-        publishSubject = PublishSubject.create<ByteArray>()
+
         try {
             /*打开相机*/
             mCamera = Camera.open(config.currentCameraId)
+            parameters = mCamera?.parameters
+            if (configFlash(config)) {
+                totlePublishSubject.onNext(BaseEvent(null, EventType.FLASH_SUCCEE))
+            } else {
+                totlePublishSubject.onNext(BaseEvent(null, EventType.FLASH_FAILED))
+            }
+
+
             /*设置旋转方向*/
             mCamera?.setDisplayOrientation(90)
             /*添加holder创建回调*/
             preview.getHolder().addCallback(this)
             /*设置预览回调*/
-            mCamera?.setPreviewCallback { bytes, camera -> publishSubject.onNext(bytes) }
-            /*订阅预览流，发送到对应外部的流中*/
-            publishSubject.subscribe({ totlePublishSubject.onNext(BaseEvent(it, EventType.PERVIEW)) })
+            mCamera?.setPreviewCallback { bytes, camera ->
+
+                totlePublishSubject.onNext(BaseEvent(bytes, EventType.PERVIEW))
+            }
             /*切换摄像头打开预览的代码*/
             mCamera?.setPreviewDisplay(preview.getHolder())
             mCamera?.startPreview()
@@ -48,7 +55,26 @@ class Camera1(val preview: PreviewImpl) : CameraImpl, SurfaceHolder.Callback {
 
         }
 
+
+
+
         return totlePublishSubject
+    }
+
+    /*配置散光灯*/
+    fun configFlash(config: Config): Boolean {
+        /*获取硬件支持的闪光灯模式*/
+        val modes = mCamera?.parameters?.supportedFlashModes
+        /*获取用户设置的模式*/
+        val mode = config.flashModel.Model
+        if (modes != null && modes!!.contains(mode)) {
+            /*如果包含这种模式*/
+            parameters?.flashMode = mode
+            return true
+        } else {
+            /*如果不包含这种模式*/
+            return false
+        }
     }
 
 

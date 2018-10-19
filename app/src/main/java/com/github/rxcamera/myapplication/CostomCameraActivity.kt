@@ -35,14 +35,19 @@ class CostomCameraActivity : AppCompatActivity() {
                 .useFrontCamera()
                 .build()
 
-        rxCameraView
-                .openCamera(config)
+
+        rxCameraView.openCamera()
                 .subscribe({
                     when (it.type) {
                         EventType.PERVIEW -> {
                             Log.e("rrrrrrrr", it.cameraData.size.toString())
                         }
-
+                        EventType.FLASH_FAILED -> {
+                            Log.e("rrrrrrrr", "FLASH_FAILED")
+                        }
+                        EventType.FLASH_SUCCEE -> {
+                            Log.e("rrrrrrrr", "FLASH_SUCCEE")
+                        }
                     }
 
                 })
